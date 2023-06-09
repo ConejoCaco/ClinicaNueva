@@ -86,37 +86,6 @@ namespace ClinicaNueva
                 return total;
             }
         }
-        /*public string[] SolicitandoDatosPorId(int a)
-        {
-            string[] result;
-            using (SqlConnection connection = conexion.AbrirConexion())
-            {
-                string query = $"SELECT Usuario, Password, Rut FROM Administrador WHERE id = {a}";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            string usuario = reader.GetString(0);
-                            string password = reader.GetString(1);
-                            string rut = reader.GetString(2);
-
-                            result = new string[3] { usuario, rut, password };
-                        }
-                        else
-                        {
-                            result = new string[0];
-                        }
-                    }
-                }
-                conexion.CerrarConexion(connection);
-
-            }
-            return result;
-        }*/
         public string[,] SolicitandoDatosPorId()
         {
             string[,] usuarios;

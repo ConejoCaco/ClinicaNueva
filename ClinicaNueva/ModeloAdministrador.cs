@@ -74,6 +74,7 @@ namespace ClinicaNueva
                         if (reader.Read())
                         {
                             total = reader.GetInt32(0);
+                            Console.WriteLine(total);
                         }
                         else
                         {
@@ -85,7 +86,7 @@ namespace ClinicaNueva
                 return total;
             }
         }
-        public string[] SolicitandoDatosPorId(int a)
+        /*public string[] SolicitandoDatosPorId(int a)
         {
             string[] result;
             using (SqlConnection connection = conexion.AbrirConexion())
@@ -115,6 +116,52 @@ namespace ClinicaNueva
 
             }
             return result;
+        }*/
+        public string[,] SolicitandoDatosPorId()
+        {
+            string[,] usuarios;
+
+            using (SqlConnection connection = conexion.AbrirConexion())
+            {
+                string query = $"SELECT Usuario,Password,Rut FROM Administrador";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        int rowCount = 0;
+                        while (reader.Read())
+                        {
+                            rowCount++;
+                        }
+
+                        usuarios = new string[rowCount, 3];
+
+                        reader.Close();
+                    }
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        int rowIndex = 0;
+                        while (reader.Read())
+                        {
+                            string usuario = reader.GetString(0);
+                            string password = reader.GetString(1);
+                            string rut = reader.GetString(2);
+
+                            usuarios[rowIndex, 0] = usuario;
+                            usuarios[rowIndex, 1] = password;
+                            usuarios[rowIndex, 2] = rut;
+
+                            rowIndex++;
+                        }
+                    }
+                }
+
+                conexion.CerrarConexion(connection);
+            }
+
+            return usuarios;
         }
 
 

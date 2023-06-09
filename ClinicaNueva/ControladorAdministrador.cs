@@ -99,11 +99,55 @@ namespace ClinicaNueva
             
         }
 
-        public void Listando(DataGridView x)
+        /*public void Mostrar()
         {
-            int total = M_ADMIN.ContarAdministradores();
+            string[,] usuarios = M_ADMIN.SolicitandoDatosPorId();
 
-            for (int i = 0;i < total;i++) { }
+            // Obtener la cantidad de filas y columnas del arreglo
+            int rowCount = usuarios.GetLength(0);
+            int columnCount = usuarios.GetLength(1);
+
+            // Recorrer el arreglo e imprimir los datos de cada usuario
+            for (int i = 0; i < rowCount; i++)
+            {
+                string usuario = usuarios[i, 0];
+                string password = usuarios[i, 1];
+                string rut = usuarios[i, 2];
+
+                Console.WriteLine($"Usuario: {usuario}, Password: {password}, Rut: {rut}");
+            }
+        }*/
+        public void Mostrar(DataGridView dataGridView)
+        {
+            string[,] usuarios = M_ADMIN.SolicitandoDatosPorId();
+
+            // Obtener la cantidad de filas y columnas del arreglo
+            int rowCount = usuarios.GetLength(0);
+            int columnCount = usuarios.GetLength(1);
+
+            // Limpiar el DataGridView
+            dataGridView.Rows.Clear();
+            dataGridView.Columns.Clear();
+
+            // Agregar las columnas al DataGridView con nombres personalizados
+            dataGridView.Columns.Add("Usuario", "Usuario");
+            dataGridView.Columns.Add("Contraseña", "Contraseña");
+            dataGridView.Columns.Add("Rut", "Rut");
+
+            // Agregar las filas al DataGridView
+            for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
+            {
+                string[] rowData = new string[columnCount];
+                for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
+                {
+                    rowData[columnIndex] = usuarios[rowIndex, columnIndex];
+                }
+
+                dataGridView.Rows.Add(rowData);
+            }
         }
+
+
+
     }
 }

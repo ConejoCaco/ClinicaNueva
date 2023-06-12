@@ -32,7 +32,7 @@ namespace ClinicaNueva
                 if (ctrADM.Login())
                 {
                     this.Hide();
-                    Form2 fm2 = new Form2();
+                    Form2 fm2 = new Form2(ctrADM);
                     fm2.Show();
                 }
                 else

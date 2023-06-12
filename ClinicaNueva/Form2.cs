@@ -12,13 +12,31 @@ namespace ClinicaNueva
 {
     public partial class Form2 : Form
     {
-        ControladorAdministrador ctrAdmin = new ControladorAdministrador();
-        public Form2()
+        ControladorAdministrador ctrAdmin;
+        public Form2(Object ctrADM)
         {
             InitializeComponent();
+            ctrAdmin = (ControladorAdministrador)ctrADM;
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1();
+            this.Hide();
+            frm.Show();
+            
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            if (!ctrAdmin.redirigir())
+            {
+                tabControl1.TabPages.Remove(tabPage3);
+            }
+            label1.Text = ctrAdmin.Name;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             ctrAdmin.Mostrar(dataGridView1);
         }

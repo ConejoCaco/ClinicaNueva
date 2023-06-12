@@ -12,7 +12,7 @@ namespace ClinicaNueva
     class ControladorAdministrador
     {
         public ModeloAdministrador M_ADMIN = new ModeloAdministrador();
-        private string adm, pass;
+        private string adm, pass, name;
 
         public string Adm
         {
@@ -24,6 +24,12 @@ namespace ClinicaNueva
         {
             get { return pass; }
             set { pass = value; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
         }
 
         public bool Rut(string rut)
@@ -92,6 +98,7 @@ namespace ClinicaNueva
             string[] datos = M_ADMIN.SolicitarAdmin(adm);
             if (datos[0].Equals(adm) && datos[1].Equals(pass))
             {
+                Name = datos[2];
                 return true;
 
             }
@@ -99,10 +106,20 @@ namespace ClinicaNueva
             
         }
 
+        public bool redirigir ()
+        {
+            int a = M_ADMIN.solicitarID(Adm);
+            if(a == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
         
         public void Mostrar(DataGridView dataGridView)
         {
-            string[,] usuarios = M_ADMIN.SolicitandoDatosPorId();
+            string[,] usuarios = M_ADMIN.SolicitandoDatosTabla();
 
             // Obtener la cantidad de filas y columnas del arreglo
             int rowCount = usuarios.GetLength(0);

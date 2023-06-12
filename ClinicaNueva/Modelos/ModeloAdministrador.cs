@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ClinicaNueva
 {
@@ -33,7 +34,7 @@ namespace ClinicaNueva
             string[] result;
             using (SqlConnection connection = conexion.AbrirConexion())
             {
-                string query = $"SELECT Password, Rut FROM Administrador WHERE Rut = '{a}'";
+                string query = $"SELECT Password, Rut, Usuario FROM Administrador WHERE Rut = '{a}'";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -44,8 +45,9 @@ namespace ClinicaNueva
                         {
                             string password = reader.GetString(0);
                             string rut = reader.GetString(1);
-
-                            result = new string[2] {rut,password};
+                            string name = reader.GetString(2);
+                            
+                            result = new string[3] {rut,password,name};
                         }
                         else
                         {
@@ -59,12 +61,12 @@ namespace ClinicaNueva
             return result;
         }
 
-        public int ContarAdministradores()
+        public int solicitarID(string a)
         {
-            int total = 0;
+            int id = 0;
             using (SqlConnection connection = conexion.AbrirConexion())
             {
-                string query = "SELECT COUNT (Rut) FROM Administrador";
+                string query = $"SELECT id FROM Administrador WHERE Rut = '{a}'";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -73,20 +75,20 @@ namespace ClinicaNueva
                     {
                         if (reader.Read())
                         {
-                            total = reader.GetInt32(0);
-                            Console.WriteLine(total);
-                        }
-                        else
-                        {
-                            Console.WriteLine("No se encontraron datos");
+                            id = reader.GetInt32(0);
+                            
+                            return id;
+                            
                         }
                     }
                 }
                 conexion.CerrarConexion(connection);
-                return total;
             }
+            
+            return id;
+
         }
-        public string[,] SolicitandoDatosPorId()
+        public string[,] SolicitandoDatosTabla()
         {
             string[,] usuarios;
 

@@ -11,13 +11,13 @@ namespace ClinicaNueva
 {
     class ControladorAdministrador
     {
-        public ModeloAdministrador M_ADMIN = new ModeloAdministrador();
-        private string adm, pass, name;
+        ModeloAdministrador M_ADMIN = new ModeloAdministrador();
+        private string rut, pass, name;
 
-        public string Adm
+        public string Rut
         {
-            get { return adm; }
-            set { adm = value; }
+            get { return rut; }
+            set { rut = value; }
         }
 
         public string Pass
@@ -32,7 +32,7 @@ namespace ClinicaNueva
             set { name = value; }
         }
 
-        public bool Rut(string rut)
+        public bool RutT(string rut)
         {
 
             rut = rut.Replace(".", "").Replace("-", "");
@@ -95,8 +95,8 @@ namespace ClinicaNueva
 
         public bool Login()
         {
-            string[] datos = M_ADMIN.SolicitarAdmin(adm);
-            if (datos[0].Equals(adm) && datos[1].Equals(pass))
+            string[] datos = M_ADMIN.Solicitar(rut);
+            if (datos[0].Equals(rut) && datos[1].Equals(pass))
             {
                 Name = datos[2];
                 return true;
@@ -108,7 +108,7 @@ namespace ClinicaNueva
 
         public bool redirigir ()
         {
-            int a = M_ADMIN.solicitarID(Adm);
+            int a = M_ADMIN.solicitarID(Rut);
             if(a == 1)
             {
                 return true;

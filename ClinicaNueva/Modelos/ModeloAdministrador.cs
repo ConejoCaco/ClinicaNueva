@@ -29,7 +29,7 @@ namespace ClinicaNueva
             }
         }
 
-        public string[] SolicitarAdmin(string a)
+        public string[] Solicitar(string a)
         {
             string[] result;
             using (SqlConnection connection = conexion.AbrirConexion())

@@ -14,7 +14,7 @@ namespace ClinicaNueva
 
         //Las Conexiones siempre se deben cerrar!
 
-        public void RegistrarAdmin(string valor1,string valor2,string valor3)
+        public void Registrar(string valor1,string valor2,string valor3)
         {
             using (SqlConnection connection = conexion.AbrirConexion())
             {
@@ -23,10 +23,12 @@ namespace ClinicaNueva
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.ExecuteNonQuery();
+                    
                 }
-
+                
                 conexion.CerrarConexion(connection);
             }
+           
         }
 
         public string[] Solicitar(string a)

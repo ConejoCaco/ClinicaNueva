@@ -147,6 +147,40 @@ namespace ClinicaNueva
             }
         }
 
+        public bool SonPalabras(string x)
+        {
+            char[] y = x.ToCharArray();
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                if (!char.IsLetter(y[i]))
+                {
+                    Console.WriteLine("No es una letra");
+                    return false;
+
+                }
+
+            }
+            return true;
+
+        }
+        public string AgregarGuion(string texto)
+        {
+            texto = texto.ToLower();
+            texto = texto.Replace(".", "").Replace("-", "");
+
+            char ultimaLetra = texto[texto.Length - 1];
+
+            string resultado = texto.Insert(texto.Length - 1, "-");
+
+            return resultado;
+        }
+
+        public void Registro()
+        {
+            M_ADMIN.Registrar(name, pass, rut);
+        }
+
 
 
     }
